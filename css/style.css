@@ -1,3 +1,8 @@
+/*  group the redundant statements of different class
+*   highlight the line pattern upon the winning and display a slide message with adequate msg and ask to try again,
+*   try add animation on the settings button it should roll on click
+*/
+
 * {
     margin: 0;
     padding: 0;
@@ -8,12 +13,36 @@ body {
     height: 100vh;
     background: linear-gradient(to bottom right, rgb(0, 100, 113), rgb(65, 65, 65),rgb(72, 0, 111));
     font-size: 45px;
-    font-family: Lato,sans-serif;
-    font-weight: 400;
+    font-family: Monoton, Lato, sans-serif;
+    font-weight: 300;
+    color: #fff;
 }
 
-.main-container { 
-    width : 440px;
+/* settings icons */
+.main-settings {
+    float: right;
+    margin: 55px;
+    line-height: 0;
+    font-size: 55px;
+}
+
+
+
+/* controller */
+
+/*margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;*/
+
+.main-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width : 430px;
     height: 450px;
     border: 10px solid rgba(209, 209, 209, 0.2);
     border-radius: 30px;
@@ -39,7 +68,7 @@ body {
     border-radius: 20px;
     width: 90px;
     height: 90px;
-    margin-right: 1%;
+    margin-right: 5%;
     padding: 5%;
     line-height: 35px;
 }
@@ -51,3 +80,4 @@ body {
 .element--1__3,
 .element--2__3,
 .element--3__3 { margin-right: 0;}
+
