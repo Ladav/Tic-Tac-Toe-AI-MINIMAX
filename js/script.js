@@ -15,10 +15,26 @@ const dis = function() {
 dis();
 
 
+
+// this is global var which contain information about how many space blank (total - filled)
+var moreToGo = 9;
+var flag = //can be min or max
+
 // 2) write the min-max algo logic
 
-const turnx = function minmax(tt) {
+const turnx = function minmax(newArr) {
+    
     
 }
 
+function turn(ttt) {
+    
+    loop(moreToGo)  // run loop for all place
+    {
+        if(tttArr[][] === ' '){
+        // call minmax for each place (this is for the level 1 below level 0 rest of the levels will be tackled in minmax fx)
+        }
+    }
+        
+}
 
