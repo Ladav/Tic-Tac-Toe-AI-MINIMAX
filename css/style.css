@@ -1,6 +1,8 @@
 /*  group the redundant statements of different class
 *   highlight the line pattern upon the winning and display a slide message with adequate msg and ask to try again,
 *   try add animation on the settings button it should roll on click
+*   make sure the text is have proper padding from all sides
+*   i want the component(bar) to float over the other component when someone clicks on setting 
 */
 
 * {
@@ -12,9 +14,7 @@
 body { 
     height: 100vh;
     background: linear-gradient(to bottom right, rgb(0, 100, 113), rgb(65, 65, 65),rgb(72, 0, 111));
-    font-size: 45px;
-    font-family: Monoton, Lato, sans-serif;
-    font-weight: 300;
+    font-family: Monoton;
     color: #fff;
 }
 
@@ -24,24 +24,16 @@ body {
     margin: 55px;
     line-height: 0;
     font-size: 55px;
+    cursor: pointer;
 }
 
+/* Main - Controller */
 
-
-/* controller */
-
-/*margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;*/
-
-.main-container {
+.main-container { 
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width : 430px;
     height: 450px;
     border: 10px solid rgba(209, 209, 209, 0.2);
@@ -50,34 +42,32 @@ body {
 }
 
 .container { 
-    display: inline-block;
-    height: 100%;
     width: 100%;
+    height: 100%;
+    text-align: center;
 }
 
 .row {
-    width 100%;
-    height: 33.33%;
-    padding: 5%; 
+    display: block;
+    height: 33.34%;
+    padding: 2px;  
 }
+
+.row { margin: 0px 0; }
+.row--1 { margin-top: 0px; }
+.row--3 { margin-bottom: 0px; }
 
 .element {
     display: inline-block;
+    font-size: 55px;
+    width: 100px;
+    height: 100px;
     text-align: center;
     border: 10px solid rgba(209, 209, 209, 0.2);
     border-radius: 20px;
-    width: 90px;
-    height: 90px;
-    margin-right: 5%;
-    padding: 5%;
-    line-height: 35px;
+    margin: 7px 5px;
+    padding: 2px;
+    cursor: pointer;
+    vertical-align: middle;
+    line-height: 80px;
 }
-
-.element--1__1,
-.element--2__1,
-.element--3__1 { margin-left: 0;}
-
-.element--1__3,
-.element--2__3,
-.element--3__3 { margin-right: 0;}
-
