@@ -4,20 +4,39 @@
 
 /* using min-max algo for computer */
 
+const arr = [3][3];
+let playerActive = 'O';  // it is a flag representing active player(from setting we can set/change the default player)
+/**
+*  1. Initialize matrix
+*  2. Display Matrix
+*  3. Active Player
+*  4. check if Active player is the winner
+*  5. get User input
+*/
 
-// 1) select data structure 
-let ttt = [[' ',' ','o'], ['x',' ','x'], ['o','x','o']];
-let currentPlayer = 'X';  // it is a flag representing active player(from setting we can set/change the default player)
-const dis = function() {
+
+// 1. Initialize matrix
+const init = () => {
+    for(let i = 0; i < 3; i++){
+        for(let j = 0; j < 3; j++){
+            matrix[i][j] = ' ';
+    }
+}
+
+// 2. Display Matrix
+const dis = () => {
     console.log(`${ttt[0][0]} | ${ttt[0][1]} | ${ttt[0][2]} `);
     console.log(`${ttt[1][0]} | ${ttt[1][1]} | ${ttt[1][2]} `);
     console.log(`${ttt[2][0]} | ${ttt[2][1]} | ${ttt[2][2]} `);
 };
-dis();
+
+// 3. Active Player
+const toggleActive = () => {
+    playerActive = playerActive === 'O' ? 'X' : 'O';
+};
 
 
-// 3) check who won the match
-
+// 4. check if Active player is the winner
 const check = arr => {
     // 1) check rows
     for(let i = 0; i < 3; i++){
@@ -40,5 +59,37 @@ const check = arr => {
     }
     
     // 4) No winnig condition
-    return -1;
+    return ' ';
 };
+    
+// 5. get User input
+const getUserInput = () => {
+    let x,y;
+    console.log(`Enter X and Y cord for your move(according to the matrix) :`);
+    x = parseInt(prompt('x'), 10);
+    y = parseInt(prompt('y'), 10);
+    if(arr[x][y] == ' ') {
+        arr[x][y] = playerActive;
+    }
+    else {
+        prompt(`invalid move`);
+    } 
+};
+
+//***************************************************//
+//*************** GLOBAL APP CONTROLLER *************//
+//***************************************************//
+const controller = () => {
+    const result = ' ';  //store (X,O) to check if Active player won
+    init();
+    
+    for(;;) {
+        dis();
+        toggleActive();
+        getUserInput();
+        result = check();
+        if(result === 'X' || result === 'O') break;
+    }
+    console.log(`player {playerActive} won this match`); 
+};
+controller();
