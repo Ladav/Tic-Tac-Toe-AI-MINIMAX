@@ -35,7 +35,6 @@ const toggleActive = () => {
     playerActive = playerActive === 'O' ? 'X' : 'O';
 };
 
-<<<<<<< HEAD
 // this is global var which contain information about how many space blank (total - filled)
 var moreToGo = 9;
 var flag = //can be min or max
@@ -46,7 +45,7 @@ const turnx = function minmax(newArr) {
     
     
 }
-
+/*
 function turn(ttt) {
     
     loop(moreToGo)  // run loop for all place
@@ -57,10 +56,7 @@ function turn(ttt) {
     }
         
 }
-
-// 3) check who won the match
-=======
->>>>>>> design
+*/
 
 // 4. check if Active player is the winner
 const check = arr => {
@@ -94,8 +90,8 @@ const getUserInput = () => {
     console.log(`Enter X and Y cord for your move(according to the matrix) :`);
     x = parseInt(prompt('x'), 10);
     y = parseInt(prompt('y'), 10);
-    if(arr[x][y] == ' ') {
-        arr[x][y] = playerActive;
+    if(arr[x-1][y-1] == ' ') {
+        arr[x-1][y-1] = playerActive;
     }
     else {
         prompt(`invalid move`);
