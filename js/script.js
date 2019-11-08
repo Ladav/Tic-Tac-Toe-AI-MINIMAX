@@ -21,29 +21,16 @@ const logicController = (() => {
     let playerActive = 'X';  // it is a flag representing active player(from setting we can set/change the default player)
 
     return{
-            // 1. Initialize matrix
+            // Initialize matrix
             resetDataStructure: () => {
                 for(let i = 0; i < 3; i++){
                     for(let j = 0; j < 3; j++){
                         matrix[i][j] = ' ';
                     }
                 }
-            },
+            },        
         
-            // 2. Display Matrix
-            dis: () => {
-                console.log(`${matrix[0][0]} | ${matrix[0][1]} | ${matrix[0][2]} `);
-                console.log(`${matrix[1][0]} | ${matrix[1][1]} | ${matrix[1][2]} `);
-                console.log(`${matrix[2][0]} | ${matrix[2][1]} | ${matrix[2][2]} `);
-            },
-        
-            // 3. Active Player
-            toggleActive:  () => {
-                playerActive = playerActive === 'O' ? 'X' : 'O';
-            },
-        
-        
-            // 4. check if Active player is the winner
+            // check if Active player is the winner
             check: () => {
                 // 1) check rows
                 for(let i = 0; i < 3; i++){
@@ -66,27 +53,10 @@ const logicController = (() => {
                 }
                 
                 // 4) No winnig condition
-                return ' ';
+                return undefined;
             },
-                
-            // 5. get User input
-            getUserInput: () => {
-                let x,y;
-                console.log(`Enter X and Y cord for your move(according to the matrix) :`);
-                
-                x = parseInt(prompt(`enter x-cord. for ${playerActive}.`), 10);
-                y = parseInt(prompt(`enter y-cord. for ${playerActive}.`), 10);
-                if(matrix[x-1][y-1] == ' ') {
-                    matrix[x-1][y-1] = playerActive;
-                }
-                else {
-                    prompt(`invalid move`);
-                    getUserInput(); // change to next player if inside
-                } 
-            },
-
              
-            updateData: data => {
+            updateMatrix: data => {
                 let row, col, temp;
                 // ex- data = 'element--1__1'
                 temp = data.split('__');
@@ -101,6 +71,11 @@ const logicController = (() => {
 
                 //updating matrix
                 matrix[row - 1][col - 1] = playerActive;
+            },
+
+            // Active Player
+            toggleActive:  () => {
+                playerActive = playerActive === 'O' ? 'X' : 'O';
             },
 
             // Active User/player
@@ -126,18 +101,34 @@ const UIController = (() => {
             field_3_2 : document.querySelector('.element--3__2'),
             field_3_3 : document.querySelector('.element--3__3')
         },
-        allFields : document.querySelectorAll('.element')
+        allFields : document.querySelectorAll('.element'),
+        X: document.querySelector('.x-container'),
+        O: document.querySelector('.o-container'),
+    };
+
+    const setPlayerActive = () => {
+        DOMInput.X.classList.toggle('active');
+        DOMInput.O.classList.toggle('active');
     };
 
     return {
         // reset the game's UI
-        resetUI : () => {
+        resetUI : (activePlayer) => {
+            // clean the Matrix
             Array.from(DOMInput.allFields).forEach(field => field.textContent = ' ');
+
+            // highlight active player
+            DOMInput[activePlayer].classList.add('active');
         },
 
         // updating UI against user select
-        updateUI: (field, player) => {
+        updateField : (field, player) => {
             field.textContent = player;
+        },
+
+        updateActivePlayer : (activePlayer) => {
+            console.log(activePlayer);
+            setPlayerActive();
         },
 
         getDOMInput: () => DOMInput
@@ -161,32 +152,59 @@ const controller = ((UICtrl, logicCtrl) => {
         });
     };
 
+    // re-initailize the game
+    const reset = () => {    
+        // clearing the matrix data
+        logicCtrl.resetDataStructure();
+
+        // clearing the UI / reset
+        UICtrl.resetUI(logicCtrl.getPlayerActive());
+    };
+
+    const toggleUser = () => {
+        // 1-change active player
+        logicCtrl.toggleActive();
+
+        // 2-update active player on UI
+        UICtrl.updateActivePlayer(logicCtrl.getPlayerActive());        
+    };
+
     const getUserInput = (event) => {
         const field = event.target
         const value = field.textContent;
 
         // 1-Check matrix ,if the required box is empty
         if(value === ' '){
-            console.log(event.target)           //testing
             // 2-Update DS matrix
-            logicCtrl.updateData(field.className);
+            logicCtrl.updateMatrix(field.className);
 
             // 3-Update UI
-            UICtrl.updateUI(event.target, logicCtrl.getPlayerActive())
-        }
+            UICtrl.updateField(event.target, logicCtrl.getPlayerActive())
 
-        ////////// change active user after check
+            // 4-check if the player won the match
+            check();
+
+            // 5-change active user
+            toggleUser();
+        }
+    };
+
+    const check = () => {
+        // Inspect Data Structure
+        const result = logicCtrl.check();
+        
+        // if active user does't won, return undefined
+        if(result){ 
+            // Render Winner on the page
+                // pending design a congratulations window
+            console.log(`${logicCtrl.getPlayerActive()} is the winner!`);
+    
+            // reset UI
+            reset();
+        }
     };
 
     let result = ' ';  //store (X,O) to check if Active player won
-
-    const reset = () => {    
-        // clearing the matrix data
-        logicCtrl.resetDataStructure();
-
-        // clearing the UI / reset
-        UICtrl.resetUI();
-    };
 
     
     /*
