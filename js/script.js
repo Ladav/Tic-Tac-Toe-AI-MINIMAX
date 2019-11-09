@@ -31,7 +31,7 @@ const logicController = (() => {
             },        
         
             // check if Active player is the winner
-            check: () => {
+            checkMatrix: () => {
                 // 1) check rows
                 for(let i = 0; i < 3; i++){
                 if(matrix[i][0] === matrix[i][1] && matrix[i][1] === matrix[i][2]){
@@ -56,7 +56,7 @@ const logicController = (() => {
                 return undefined;
             },
              
-            updateMatrix: data => {
+            userInput: data => {
                 let row, col, temp;
                 // ex- data = 'element--1__1'
                 temp = data.split('__');
@@ -104,6 +104,8 @@ const UIController = (() => {
         allFields : document.querySelectorAll('.element'),
         X: document.querySelector('.x-container'),
         O: document.querySelector('.o-container'),
+        winWindow: document.querySelector('.winner'),
+        winner: document.querySelector('.player')
     };
 
     const setPlayerActive = () => {
@@ -119,6 +121,9 @@ const UIController = (() => {
 
             // highlight active player
             DOMInput[activePlayer].classList.add('active');
+
+            // remove the congrats message from the previous gameplay
+            DOMInput.winWindow.style.display = 'none';
         },
 
         // updating UI against user select
@@ -129,6 +134,14 @@ const UIController = (() => {
         updateActivePlayer : (activePlayer) => {
             console.log(activePlayer);
             setPlayerActive();
+        },
+
+        renderWinner: (activePlayer) => {
+            // 1-upadate the activePlayer in the html 
+            DOMInput.winner.textContent = activePlayer;
+            //console.log(DOMInput.winner); testing
+            // 2-render congratulations message
+            DOMInput.winWindow.style.display = 'block';
         },
 
         getDOMInput: () => DOMInput
@@ -176,7 +189,7 @@ const controller = ((UICtrl, logicCtrl) => {
         // 1-Check matrix ,if the required box is empty
         if(value === ' '){
             // 2-Update DS matrix
-            logicCtrl.updateMatrix(field.className);
+            logicCtrl.userInput(field.className);
 
             // 3-Update UI
             UICtrl.updateField(event.target, logicCtrl.getPlayerActive())
@@ -186,21 +199,25 @@ const controller = ((UICtrl, logicCtrl) => {
 
             // 5-change active user
             toggleUser();
+
+            // 6-if matrix is full render a draw msg and reset UI pending
         }
     };
 
     const check = () => {
         // Inspect Data Structure
-        const result = logicCtrl.check();
+        const result = logicCtrl.checkMatrix();
         
         // if active user does't won, return undefined
         if(result){ 
             // Render Winner on the page
-                // pending design a congratulations window
+            UICtrl.renderWinner(logicCtrl.getPlayerActive());
             console.log(`${logicCtrl.getPlayerActive()} is the winner!`);
     
-            // reset UI
-            reset();
+            // display winner window for 2 second then reset UI
+            setTimeout(() => {
+                reset();
+            }, 2000);
         }
     };
 
