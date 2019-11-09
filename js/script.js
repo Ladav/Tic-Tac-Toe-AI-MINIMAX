@@ -8,40 +8,61 @@
 //***************************************************//
 //**************** Function COTROLLER *************//
 //***************************************************// 
-/**
-*  1. Initialize matrix
-*  2. Display Matrix
-*  3. Active Player
-*  4. check if Active player is the winner
-*  5. get User input
-*/
 const logicController = (() => {
     const matrix = [new Array(3),new Array(3),new Array(3)];
 
     let playerActive = 'X';  // it is a flag representing active player(from setting we can set/change the default player)
 
+    const resetDataStructure = () => {
+        for(let i = 0; i < 3; i++){
+            for(let j = 0; j < 3; j++){
+                matrix[i][j] = ' ';
+            }
+        }
+    };
+
+    const scrapeData = (data) => {
+        let row, col, temp;
+        // ex- data = 'element--1__1'
+        temp = data.split('__');
+
+        // temp = ['element--1', '1'] we got coloumn and -1 to make 0 index based 
+        col = parseInt(temp[1], 10) - 1;
+        
+        // temp = ['element', '1']
+        temp = temp[0].split('--');
+        row = parseInt(temp[1], 10) - 1;    
+
+        return {row, col};
+    };
+
+    const isMatrixFull = () => {
+        for(let i = 0; i < 3; i++){
+            for(let j = 0; j < 3; j++){
+                if(matrix[i][j] === ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
     return{
             // Initialize matrix
-            resetDataStructure: () => {
-                for(let i = 0; i < 3; i++){
-                    for(let j = 0; j < 3; j++){
-                        matrix[i][j] = ' ';
-                    }
-                }
-            },        
+            resetDS: () => { resetDataStructure(); },        
         
             // check if Active player is the winner
             checkMatrix: () => {
                 // 1) check rows
-                for(let i = 0; i < 3; i++){
-                if(matrix[i][0] === matrix[i][1] && matrix[i][1] === matrix[i][2]){
+                for(let i = 0; i < 3; i++) {
+                    if(matrix[i][0] === matrix[i][1] && matrix[i][1] === matrix[i][2]) {
                         if(matrix[i][0] !== ' ') return matrix[i][0];
                     }
                 }
                 
                 // 2) check cols
-                for(let i = 0; i < 3; i++){
-                if(matrix[0][i] === matrix[1][i] && matrix[1][i] === matrix[2][i]){
+                for(let i = 0; i < 3; i++) {
+                    if(matrix[0][i] === matrix[1][i] && matrix[1][i] === matrix[2][i]) {
                         if(matrix[0][i] !== ' ') return matrix[0][i];
                     }
                 }
@@ -56,33 +77,26 @@ const logicController = (() => {
                 return undefined;
             },
              
-            userInput: data => {
-                let row, col, temp;
-                // ex- data = 'element--1__1'
-                temp = data.split('__');
-
-                // temp = ['element--1', '1'] we got coloumn
-                col = parseInt(temp[1], 10);
+            userInput: (dataString) => {
+                let data;
                 
-                // temp = ['element', '1']
-                temp = temp[0].split('--');
-
-                row = parseInt(temp[1], 10);
+                // scraping the required data from the dataString
+                data = scrapeData(dataString);
 
                 //updating matrix
-                matrix[row - 1][col - 1] = playerActive;
+                matrix[data.row][data.col] = playerActive;
             },
 
             // Active Player
-            toggleActive:  () => {
-                playerActive = playerActive === 'O' ? 'X' : 'O';
-            },
+            toggleActive:  () => { playerActive = playerActive === 'O' ? 'X' : 'O'; },
+
+            // check if the matrix is fully filled
+            isFull: () => { return (isMatrixFull()); },
 
             // Active User/player
             getPlayerActive: () => playerActive
     };
 })();
-
 
 
 //***************************************************//
@@ -105,7 +119,8 @@ const UIController = (() => {
         X: document.querySelector('.x-container'),
         O: document.querySelector('.o-container'),
         winWindow: document.querySelector('.winner'),
-        winner: document.querySelector('.player')
+        winner: document.querySelector('.player'),
+        textDraw: document.querySelector('.winner p')
     };
 
     const setPlayerActive = () => {
@@ -139,15 +154,24 @@ const UIController = (() => {
         renderWinner: (activePlayer) => {
             // 1-upadate the activePlayer in the html 
             DOMInput.winner.textContent = activePlayer;
-            //console.log(DOMInput.winner); testing
+
             // 2-render congratulations message
+            DOMInput.winWindow.style.display = 'block';
+        },
+
+        renderDraw: () => {
+            // 1-update the activePlayer and message
+            DOMInput.winner.textContent = '';
+            DOMInput.textDraw.textContent = 'Draw!';
+            
+            // 2-render congratulations message
+            DOMInput.textDraw.style.color = '#222';
             DOMInput.winWindow.style.display = 'block';
         },
 
         getDOMInput: () => DOMInput
     };
 })();
-
 
 
 //***************************************************//
@@ -168,7 +192,7 @@ const controller = ((UICtrl, logicCtrl) => {
     // re-initailize the game
     const reset = () => {    
         // clearing the matrix data
-        logicCtrl.resetDataStructure();
+        logicCtrl.resetDS();
 
         // clearing the UI / reset
         UICtrl.resetUI(logicCtrl.getPlayerActive());
@@ -182,11 +206,18 @@ const controller = ((UICtrl, logicCtrl) => {
         UICtrl.updateActivePlayer(logicCtrl.getPlayerActive());        
     };
 
+    // it provide a 2 sec delay to display the winner or draw message
+    const clearMsgWin = () => {
+        setTimeout(() => {
+            reset();
+        }, 2000);
+    };
+
     const getUserInput = (event) => {
-        const field = event.target
+        const field = event.target;
         const value = field.textContent;
 
-        // 1-Check matrix ,if the required box is empty
+        // Check matrix ,if the required box is empty
         if(value === ' '){
             // 2-Update DS matrix
             logicCtrl.userInput(field.className);
@@ -197,10 +228,17 @@ const controller = ((UICtrl, logicCtrl) => {
             // 4-check if the player won the match
             check();
 
-            // 5-change active user
-            toggleUser();
+            // 5-if matrix is full  
+            if(logicCtrl.isFull()) {
+                // 1-render a draw msg
+                UICtrl.renderDraw();
 
-            // 6-if matrix is full render a draw msg and reset UI pending
+                // 2-reset UI
+                clearMsgWin();
+            }
+
+            // 6-change active user
+            toggleUser();
         }
     };
 
@@ -215,24 +253,9 @@ const controller = ((UICtrl, logicCtrl) => {
             console.log(`${logicCtrl.getPlayerActive()} is the winner!`);
     
             // display winner window for 2 second then reset UI
-            setTimeout(() => {
-                reset();
-            }, 2000);
+            clearMsgWin(); 
         }
     };
-
-    let result = ' ';  //store (X,O) to check if Active player won
-
-    
-    /*
-        logicCtrl.dis();
-        logicCtrl.toggleActive();
-        logicCtrl.getUserInput();
-        result = logicCtrl.check();
-        if(result === 'X' || result === 'O') break;
-    
-    console.log(`player ${logicCtrl.getPlayerActive} won this match`); 
-    */
 
     return {
         start: () => {
