@@ -128,6 +128,9 @@ const UIController = (() => {
         DOMInput.O.classList.toggle('active');
     };
 
+    // this check if there is any msg being displayed on the screen, return's true or false
+    const anyActiveMsg = () => DOMInput.winWindow.style.display === 'block';
+
     return {
         // reset the game's UI
         resetUI : (activePlayer) => {
@@ -152,21 +155,30 @@ const UIController = (() => {
         },
 
         renderWinner: (activePlayer) => {
-            // 1-upadate the activePlayer in the html 
-            DOMInput.winner.textContent = activePlayer;
+            console.log(anyActiveMsg());
+            // check if any msg is already being displaced on the screen
+            if(!anyActiveMsg()) {
+                // 1-upadate the activePlayer in the html 
+                DOMInput.winner.textContent = activePlayer;
+                DOMInput.textDraw.textContent = 'The Winner is ';
 
-            // 2-render congratulations message
-            DOMInput.winWindow.style.display = 'block';
+                // 2-render congratulations message
+                DOMInput.textDraw.style.color = 'rgba(236,226,29,1)';
+                DOMInput.winWindow.style.display = 'block';
+            }
         },
 
         renderDraw: () => {
-            // 1-update the activePlayer and message
-            DOMInput.winner.textContent = '';
-            DOMInput.textDraw.textContent = 'Draw!';
-            
-            // 2-render congratulations message
-            DOMInput.textDraw.style.color = '#222';
-            DOMInput.winWindow.style.display = 'block';
+            // check if any msg is already being displaced on the screen
+            if(!anyActiveMsg()) {
+                // 1-update the activePlayer and message
+                DOMInput.winner.textContent = '';
+                DOMInput.textDraw.textContent = 'Draw!';
+                
+                // 2-render congratulations message
+                DOMInput.textDraw.style.color = '#222';
+                DOMInput.winWindow.style.display = 'block';
+            }
         },
 
         getDOMInput: () => DOMInput
@@ -216,6 +228,7 @@ const controller = ((UICtrl, logicCtrl) => {
     const getUserInput = (event) => {
         const field = event.target;
         const value = field.textContent;
+        let result = false;
 
         // Check matrix ,if the required box is empty
         if(value === ' '){
@@ -226,11 +239,12 @@ const controller = ((UICtrl, logicCtrl) => {
             UICtrl.updateField(event.target, logicCtrl.getPlayerActive())
 
             // 4-check if the player won the match
-            check();
+            result = check();
 
             // 5-if matrix is full  
-            if(logicCtrl.isFull()) {
+            if(logicCtrl.isFull() && !result) {
                 // 1-render a draw msg
+                console.log('draw!');
                 UICtrl.renderDraw();
 
                 // 2-reset UI
@@ -254,7 +268,11 @@ const controller = ((UICtrl, logicCtrl) => {
     
             // display winner window for 2 second then reset UI
             clearMsgWin(); 
+
+            // return true to handle the case when the game won and the whole matrix is also filled
+            return true;
         }
+        return false;
     };
 
     return {
