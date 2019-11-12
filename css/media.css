@@ -46,16 +46,39 @@
 }
 
 @media only screen and (max-width: 620px) {
+    .x-container,
+    .o-container {
+        font-size:100px;
+        width : 100px;
+        height: 100px;
+    }
+    .x-container { top: 93%; left: 5%; }
+    .o-container { top: 93%; right: 5%; }
+}
+
+@media only screen and (max-width: 500px) {
+    .title {
+        margin: 20px 0 0 20px;
+        font-size: 35px;
+    }
 
     .x-container,
     .o-container {
-        float: none;
-        font-size:80px;
+        font-size: 90px;
         width : 90px;
         height: 90px;
     }
-    .x-container { top: 10%; }
-    .o-container { top: 78%; }
-    .X, .O { line-height: 85px; }
+    .x-container { top: 93%; left: 5%; }
+    .o-container { top: 93%; right: 5%; }
+    .main-container { 
+        width: 340px;  
+        height: 360px; /*- 30/430*450 -*/
+    }
 
+    .element {
+        font-size: 50px;
+        width: 84px;
+        height: 84px;
+        line-height: 64px;
+    }
 }
