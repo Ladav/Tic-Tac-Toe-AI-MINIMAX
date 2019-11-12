@@ -35,6 +35,7 @@ body {
 
 .window {
     max-width: 1024px;
+    min-width: 340px;
     height: 80%;
     margin: 0 auto;
 }
