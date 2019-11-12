@@ -181,6 +181,8 @@ const UIController = (() => {
             }
         },
 
+        isMsgDisplayed : () => anyActiveMsg(),
+
         getDOMInput: () => DOMInput
     };
 })();
@@ -226,12 +228,12 @@ const controller = ((UICtrl, logicCtrl) => {
     };
 
     const getUserInput = (event) => {
-        const field = event.target;
-        const value = field.textContent;
+        const field = event.target; //which space is selected
+        const value = field.textContent;  // is it X or O
         let result = false;
 
-        // Check matrix ,if the required box is empty
-        if(value === ' '){
+        // Check matrix ,if the required box is empty and if any message is being displayed 
+        if(value === ' ' && !UICtrl.isMsgDisplayed()){
             // 2-Update DS matrix
             logicCtrl.userInput(field.className);
 
