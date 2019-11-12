@@ -61,7 +61,6 @@
         margin: 20px 0 0 20px;
         font-size: 35px;
     }
-
     .x-container,
     .o-container {
         font-size: 90px;
@@ -71,6 +70,7 @@
     .x-container { top: 93%; left: 5%; }
     .o-container { top: 93%; right: 5%; }
     .main-container { 
+        margin-top: -30px;
         width: 340px;  
         height: 360px; /*- 30/430*450 -*/
     }
