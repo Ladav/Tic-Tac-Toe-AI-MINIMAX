@@ -34,7 +34,7 @@ body {
 }
 
 .window {
-    width: 1024px;
+    max-width: 1024px;
     height: 80%;
     margin: 0 auto;
 }
@@ -93,7 +93,7 @@ body {
     height: 200px;
 }
 
-.x-container{ float:left; }
+.x-container{ float: left; }
 .o-container{ float: right; }
 
 .X, .O { line-height: 180px; }
