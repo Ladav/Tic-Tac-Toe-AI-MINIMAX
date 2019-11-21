@@ -1,3 +1,9 @@
+/**
+ * 1.pending try async await on 224
+ */
+
+
+
 // maintain state of all the nine boxes ,those who have selected already should not be avialable for selection again.
 // implement minimax and (user againt user) in different files and import that files
 
@@ -221,7 +227,7 @@ const controller = ((UICtrl, logicCtrl) => {
     };
 
     // it provide a 2 sec delay to display the winner or draw message
-    const clearMsgWin = () => {
+    const clearMsgWin =  () => {
         setTimeout(() => {
             reset();
         }, 2000);
