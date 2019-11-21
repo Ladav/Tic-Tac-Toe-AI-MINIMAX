@@ -1,3 +1,7 @@
+/**
+    in android when i click on a field it get selected and opacity get set at 0.5 and doesn't change when i un-touch that 
+*/
+
 /*  group the redundant statements of different class
 *   highlight the line pattern upon the winning and display a slide message with adequate msg and ask to try again,
 *   try add animation on the settings button it should roll on click
@@ -16,6 +20,10 @@ body {
     background: linear-gradient(to bottom right, rgb(0, 100, 113), rgb(65, 65, 65),rgb(72, 0, 111));
     font-family: Monoton, arial;
     color: #fff;
+    -webkit-tap-highlight-color: transparent; /* android */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
     -webkit-user-select: none;  /* Safari */        
     -moz-user-select: none;     /* Firefox */
     -ms-user-select: none;      /* IE10+/Edge */
