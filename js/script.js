@@ -163,7 +163,7 @@ const UIController = (() => {
         renderWinner: (activePlayer) => {
             console.log(anyActiveMsg());
             // check if any msg is already being displaced on the screen
-            if(!anyActiveMsg()) {
+           // if(!anyActiveMsg()) { ----- testing
                 // 1-upadate the activePlayer in the html 
                 DOMInput.winner.textContent = activePlayer;
                 DOMInput.textDraw.textContent = 'The Winner is ';
@@ -171,12 +171,12 @@ const UIController = (() => {
                 // 2-render congratulations message
                 DOMInput.textDraw.style.color = 'rgba(236,226,29,1)';
                 DOMInput.winWindow.style.display = 'block';
-            }
+            //}
         },
 
         renderDraw: () => {
             // check if any msg is already being displaced on the screen
-            if(!anyActiveMsg()) {
+            //if(!anyActiveMsg()) {--- testing
                 // 1-update the activePlayer and message
                 DOMInput.winner.textContent = '';
                 DOMInput.textDraw.textContent = 'Draw!';
@@ -184,7 +184,7 @@ const UIController = (() => {
                 // 2-render congratulations message
                 DOMInput.textDraw.style.color = '#222';
                 DOMInput.winWindow.style.display = 'block';
-            }
+            //}
         },
 
         isMsgDisplayed : () => anyActiveMsg(),
@@ -227,7 +227,7 @@ const controller = ((UICtrl, logicCtrl) => {
     };
 
     // it provide a 2 sec delay to display the winner or draw message
-    const clearMsgWin =  () => {
+    const clearMsgWin = () => {
         setTimeout(() => {
             reset();
         }, 2000);

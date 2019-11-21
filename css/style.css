@@ -16,7 +16,10 @@ body {
     background: linear-gradient(to bottom right, rgb(0, 100, 113), rgb(65, 65, 65),rgb(72, 0, 111));
     font-family: Monoton, arial;
     color: #fff;
-    
+    -webkit-user-select: none;  /* Safari */        
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE10+/Edge */
+    user-select: none; 
 }
 
 .title { 
