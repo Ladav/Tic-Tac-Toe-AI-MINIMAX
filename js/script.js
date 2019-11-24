@@ -330,7 +330,7 @@ const controller = ((UICtrl, logicCtrl) => {
 
             // 5-change active user-- if(AI) else just change active user
             if(logicCtrl.vsAI == true && !UICtrl.isMsgDisplayed()) {
-                logicCtrl.toggleActive();   // change user to AI (make changes to DataStructure only)
+                logicCtrl.toggleActive();   //  change user to AI (make changes to DataStructure only)
                 
                 const coords = logicCtrl.aiPlayer();   // AI makes its move
                 const field = document.querySelector(`.element--${coords.row + 1}__${coords.col + 1}`);
