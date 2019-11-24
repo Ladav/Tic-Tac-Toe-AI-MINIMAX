@@ -1,5 +1,6 @@
 /**
-    in android when i click on a field it get selected and opacity get set at 0.5 and doesn't change when i un-touch that 
+  1- in android when i click on a field it get selected and opacity get set at 0.5 and doesn't change when i un-touch that 
+  2- instead of displaying popup msg, on winning and draw, try implementing little animation such as highlight the pattern of the winning situation and in case of draw just highlight the whole ttt fields
 */
 
 /*  group the redundant statements of different class
