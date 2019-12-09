@@ -96,7 +96,7 @@ const logicController = (() => {
             return { score: 0 }; // it's a draw
         }
 
-        let moves = []; //collect the move's in the current level of tree for comparision
+        let moves = []; // collect the move's in the current level of tree for comparision
 
         for(let i = 0; i < availFields.length; i++) {
             let move = {}; // to store the score and index of the current move {score:number,index:{row,col}}
