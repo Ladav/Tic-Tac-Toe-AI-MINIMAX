@@ -311,19 +311,27 @@ const controller = ((UICtrl, logicCtrl) => {
 
         // listen to changes in setting
         DOM.btn_Human.addEventListener('click', () =>{
-            // 1. turn off the AI flag
-            logicCtrl.vsAI = false;
-
-            // 2. set the second player as the 'O'
-            UICtrl.updateActivePlayer(logicCtrl.getPlayerActive());
+            if(logicCtrl.vsAI !== false) { 
+            logicCtrl.vsAI = false;    // 1. turn off the AI flag
             
-            // 3. reset the game
-            reset();
+            UICtrl.updateActivePlayer(logicCtrl.getPlayerActive());    // 2. set the second player as the 'O'
+            
+            reset();    // 3. reset the game
+            }
+
+            // 4. hide the setting panel again
+            DOM.setPanel.style.display = 'none';
         });
+
         DOM.btn_AI.addEventListener('click', () =>{
+            if(logicCtrl.vsAI === false) {
             logicCtrl.vsAI = true;    // 1. turn on the AI flag
             
-            reset();    // 2. reset the game
+            reset();   // 2. reset the game 
+            }
+            
+            // 3. hide the setting panel again
+            DOM.setPanel.style.display = 'none';
         });
     };
 
