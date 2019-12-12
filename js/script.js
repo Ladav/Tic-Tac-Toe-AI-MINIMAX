@@ -51,8 +51,7 @@ const logicController = (() => {
             }
         }
         // 3) check diagonals
-        if((curMatrix[0][0] === curMatrix[1][1] && curMatrix[1][1] === curMatrix[2][2])||(curMatrix[0][2] === curMatrix[1][1] && curMatrix[1][1] === curMatrix[2][0])) 
-        {
+        if((curMatrix[0][0] === curMatrix[1][1] && curMatrix[1][1] === curMatrix[2][2])||(curMatrix[0][2] === curMatrix[1][1] && curMatrix[1][1] === curMatrix[2][0])) {
             if(curMatrix[1][1] !== ' ') return curMatrix[1][1];                   
         }
         // 4) No winnig condition
@@ -203,11 +202,15 @@ const UIController = (() => {
             field_3_3 : document.querySelector('.element--3__3')
         },
         allFields : document.querySelectorAll('.element'),
-        X: document.querySelector('.x-container'),
-        O: document.querySelector('.o-container'),
+        X: document.querySelector('.x-container'),      // pending this is not used any where remove it
+        O: document.querySelector('.O'),
         winWindow: document.querySelector('.winner'),
         winner: document.querySelector('.player'),
-        textDraw: document.querySelector('.winner p')
+        textDraw: document.querySelector('.winner p'),
+        setting: document.querySelector('.settings-icon a'),
+        setPanel: document.querySelector('ul'),
+        btn_Human: document.querySelector('.btn-human'),
+        btn_AI: document.querySelector('.btn-AI')
     };
 
     const setPlayerActive = () => {
@@ -217,6 +220,24 @@ const UIController = (() => {
 
     // this check if there is any msg being displayed on the screen, return's true or false
     const anyActiveMsg = () => DOMInput.winWindow.style.display === 'block';
+
+
+    // listen to changes in setting
+    //pending when user click outside of the panel it should be closed automatically
+    DOMInput.setting.addEventListener('click', () =>{
+        DOMInput.setPanel.style.display = DOMInput.setPanel.style.display === 'none' ? 'block' : 'none';
+        //DOMInput.settingPanel.style.display = (DOMInput.settingPane)
+    });
+
+    DOMInput.btn_Human.addEventListener('click', () =>{
+        console.log('human is activited');
+    });
+
+    DOMInput.btn_AI.addEventListener('click', () =>{
+        console.log('AI is activited');
+    });
+
+
 
     return {
         resetUI : (activePlayer) => {   // reset the game's UI
