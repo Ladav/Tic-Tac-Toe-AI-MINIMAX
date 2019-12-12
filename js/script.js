@@ -19,7 +19,6 @@ const logicController = (() => {
                 matrix[i][j] = ' ';
             }
         }
-        playerActive = 'X';  // testing when ai vs user then user will play the first move always
     };
 
     const scrapeData = (data) => {
@@ -222,6 +221,7 @@ const UIController = (() => {
     const anyActiveMsg = () => DOMInput.winWindow.style.display === 'block';
 
 
+
     // listen to changes in setting
     //pending when user click outside of the panel it should be closed automatically
     DOMInput.setting.addEventListener('click', () =>{
@@ -229,13 +229,7 @@ const UIController = (() => {
         //DOMInput.settingPanel.style.display = (DOMInput.settingPane)
     });
 
-    DOMInput.btn_Human.addEventListener('click', () =>{
-        console.log('human is activited');
-    });
 
-    DOMInput.btn_AI.addEventListener('click', () =>{
-        console.log('AI is activited');
-    });
 
 
 
@@ -256,7 +250,9 @@ const UIController = (() => {
         },
 
         updateActivePlayer : (activePlayer) => {   // when X vs O
-                    // pending - when new game start ex- X vs O after a match of ex- X vs AI, the textContent ('AI') have to revert back to O
+            // when new game start ex- X vs O after a match of ex- X vs AI, the textContent ('AI') have to revert back to O
+            DOMInput.O.textContent = 'O';
+
             setPlayerActive();
         },
 
@@ -304,9 +300,28 @@ const controller = ((UICtrl, logicCtrl) => {
         const DOM = UICtrl.getDOMInput();
 
         const fieldArr = Object.values(DOM.field);   // converting object to array
-
         fieldArr.forEach( el => {
             el.addEventListener('click', getUserInput);
+        });
+
+        // set display property of the setting panel to none
+        DOM.setPanel.style.display = 'none';
+
+
+
+        // listen to changes in setting
+        DOM.btn_Human.addEventListener('click', () =>{
+            // 1. turn off the AI flag
+            logicCtrl.vsAI = false;
+
+            // 2. set the second player as the 'O'
+            UICtrl.updateActivePlayer(logicCtrl.getPlayerActive());
+            
+            // 3. reset the game
+            reset();
+        });
+        DOM.btn_AI.addEventListener('click', () =>{
+            console.log('AI is activited');
         });
     };
 
