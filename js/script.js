@@ -321,7 +321,9 @@ const controller = ((UICtrl, logicCtrl) => {
             reset();
         });
         DOM.btn_AI.addEventListener('click', () =>{
-            console.log('AI is activited');
+            logicCtrl.vsAI = true;    // 1. turn on the AI flag
+            
+            reset();    // 2. reset the game
         });
     };
 
