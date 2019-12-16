@@ -1,9 +1,7 @@
 /**
  * 1.pending try async await at setTimeout (inside getUserInput there is isMsgActivity is used remove it try async await)
  */
-/* when AI vs human - min-max algo for AI */
-
-
+/* when AI vs human - min-max algo as AI */
 
 //***************************************************//
 //**************** Function COTROLLER *************//
@@ -219,19 +217,13 @@ const UIController = (() => {
 
     // this check if there is any msg being displayed on the screen, return's true or false
     const anyActiveMsg = () => DOMInput.winWindow.style.display === 'block';
-
-
-
-    // listen to changes in setting
+    
+    ///// listen to changes in setting
     //pending when user click outside of the panel it should be closed automatically
     DOMInput.setting.addEventListener('click', () =>{
         DOMInput.setPanel.style.display = DOMInput.setPanel.style.display === 'none' ? 'block' : 'none';
         //DOMInput.settingPanel.style.display = (DOMInput.settingPane)
     });
-
-
-
-
 
     return {
         resetUI : (activePlayer) => {   // reset the game's UI
@@ -289,7 +281,6 @@ const UIController = (() => {
         getDOMInput: () => DOMInput
     };
 })();
-
 
 //***************************************************//
 //*************** GLOBAL APP CONTROLLER *************//
