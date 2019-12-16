@@ -146,7 +146,7 @@ const logicController = (() => {
             vsAI,   // flag about if the game is player vs AI
 
             // Initialize matrix
-            resetDS: () => { resetDataStructure(); },
+            resetDS: () => resetDataStructure(),
 
             // check if the matrix is fully filled
             isFull: () => isMatrixFull(),
@@ -304,33 +304,35 @@ const controller = ((UICtrl, logicCtrl) => {
             el.addEventListener('click', getUserInput);
         });
 
-        // set display property of the setting panel to none
+        // set display property of the setting panel to none(to default)
         DOM.setPanel.style.display = 'none';
 
-
-
         // listen to changes in setting
-        DOM.btn_Human.addEventListener('click', () =>{
-            if(logicCtrl.vsAI !== false) { 
-            logicCtrl.vsAI = false;    // 1. turn off the AI flag
-            
-            UICtrl.updateActivePlayer(logicCtrl.getPlayerActive());    // 2. set the second player as the 'O'
-            
-            reset();    // 3. reset the game
-            }
+        DOM.btn_Human.addEventListener('click', () => {     // human vs human
+            // 1. turn off the AI flag
+            logicCtrl.vsAI = false;
+
+            // 2. set the second player as the 'O'
+            UICtrl.updateActivePlayer(logicCtrl.getPlayerActive());
+
+            // 3. reset the game
+            reset();
 
             // 4. hide the setting panel again
             DOM.setPanel.style.display = 'none';
         });
 
-        DOM.btn_AI.addEventListener('click', () =>{
-            if(logicCtrl.vsAI === false) {
-            logicCtrl.vsAI = true;    // 1. turn on the AI flag
-            
-            reset();   // 2. reset the game 
-            }
-            
-            // 3. hide the setting panel again
+        DOM.btn_AI.addEventListener('click', () => {    // human vs AI
+            // 1. turn off the AI flag
+            logicCtrl.vsAI = true;
+
+            // 2. set active player to 'X', so that correct entry is displayed, as user will play first
+            logicCtrl.activePlayer = 'X';
+
+            // 3. reset the game
+            reset();
+
+            // 4. hide the setting panel again
             DOM.setPanel.style.display = 'none';
         });
     };
@@ -387,7 +389,7 @@ const controller = ((UICtrl, logicCtrl) => {
 
                 logicCtrl.toggleActive();   // change AI to user (make changes to DataStructure only)
             } 
-            else {
+            else if(logicCtrl.vsAI !== true){   // change user - for human vs human 
                 toggleUser();      // pass the control to the next play
             }
         }
