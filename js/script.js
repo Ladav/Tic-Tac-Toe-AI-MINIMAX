@@ -78,7 +78,7 @@ const logicController = (() => {
         return emptyFields;
     };
 
-    // let O- aiPlayer AND X- humanPlayer
+    ///// "MINIMAX ALGO is used..." let O- aiPlayer AND X- humanPlayer
     const minimax = (newMatrix, player = 'O') => {
         // check if there are empty fields in Matrix and return index of fields empty ex- [{row,col},{rol,col}]
         const availFields = getAvailFields(newMatrix);
@@ -143,29 +143,23 @@ const logicController = (() => {
     return{
             vsAI,   // flag about if the game is player vs AI
 
-            // Initialize matrix
-            resetDS: () => resetDataStructure(),
+            resetDS: () => resetDataStructure(),    // Initialize matrix
 
-            // check if the matrix is fully filled
-            isFull: () => isMatrixFull(),
+            isFull: () => isMatrixFull(),   // check if the matrix is fully filled
             
-            // check if Active player is the winner
-            checkWinner: () => checkMatrix(),
+            checkWinner: () => checkMatrix(),   // check if Active player is the winner
 
             userInput: (dataString) => {
                 let data;
-                
                 // scraping the required data from the dataString
                 data = scrapeData(dataString);
                 //updating matrix
                 matrix[data.row][data.col] = playerActive;
             },
 
-            // Active Player
-            toggleActive:  () => { playerActive = playerActive === 'O' ? 'X' : 'O'; },
+            toggleActive:  () => { playerActive = playerActive === 'O' ? 'X' : 'O'; },   // Active Player
 
-            // Active User/player
-            getPlayerActive: () => playerActive,
+            getPlayerActive: () => playerActive,    // Active User/player
 
             // aiPlayer
             aiPlayer: () => {
@@ -367,7 +361,7 @@ const controller = ((UICtrl, logicCtrl) => {
             // 4-check if the player won the match
             check();
 
-            // 5-change active user-- if(AI) else just change active user
+            // 5-when playing with AI--
             if(logicCtrl.vsAI == true && !UICtrl.isMsgDisplayed()) {
                 logicCtrl.toggleActive();   // change user to AI (make changes to DataStructure only)
                 
