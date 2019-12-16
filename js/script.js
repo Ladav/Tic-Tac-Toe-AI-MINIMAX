@@ -181,7 +181,6 @@ const logicController = (() => {
     };
 })();
 
-
 //***************************************************//
 //**************** UI CONTROLLER *************//
 //***************************************************//
@@ -217,7 +216,7 @@ const UIController = (() => {
 
     // this check if there is any msg being displayed on the screen, return's true or false
     const anyActiveMsg = () => DOMInput.winWindow.style.display === 'block';
-    
+
     ///// listen to changes in setting
     //pending when user click outside of the panel it should be closed automatically
     DOMInput.setting.addEventListener('click', () =>{
