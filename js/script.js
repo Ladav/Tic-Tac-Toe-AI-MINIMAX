@@ -8,8 +8,8 @@
 //***************************************************// 
 const logicController = (() => {
     const matrix = [new Array(3),new Array(3),new Array(3)];
-    let playerActive = 'X';  // it is a flag representing active player(from setting we can set/change the default player)
-    const vsAI = true;
+    let playerActive = 'X';  // flag representing active player(from setting we can set/change the default player)
+    let vsAI = true;  // flag about if the game is player vs AI
 
     const resetDataStructure = () => {
         for(let i = 0; i < 3; i++){
@@ -141,7 +141,11 @@ const logicController = (() => {
     };
 
     return{
-            vsAI,   // flag about if the game is player vs AI
+            getAI: () => vsAI,
+            setAI: (state) => { vsAI = state },
+
+            getPlayer: () => playerActive,
+            setPlayer: (state) => { playerActive = state },
 
             resetDS: () => resetDataStructure(),    // Initialize matrix
 
@@ -157,9 +161,7 @@ const logicController = (() => {
                 matrix[data.row][data.col] = playerActive;
             },
 
-            toggleActive:  () => { playerActive = playerActive === 'O' ? 'X' : 'O'; },   // Active Player
-
-            getPlayerActive: () => playerActive,    // Active User/player
+            togglePlayer:  () => { playerActive = playerActive === 'O' ? 'X' : 'O'; },   // Active Player
 
             // aiPlayer
             aiPlayer: () => {
@@ -294,10 +296,10 @@ const controller = ((UICtrl, logicCtrl) => {
         // listen to changes in setting
         DOM.btn_Human.addEventListener('click', () => {     // human vs human
             // 1. turn off the AI flag
-            logicCtrl.vsAI = false;
+            logicCtrl.setAI(false);
 
             // 2. set the second player as the 'O'
-            UICtrl.updateActivePlayer(logicCtrl.getPlayerActive());
+            UICtrl.updateActivePlayer(logicCtrl.getPlayer());
 
             // 3. reset the game
             reset();
@@ -308,10 +310,10 @@ const controller = ((UICtrl, logicCtrl) => {
 
         DOM.btn_AI.addEventListener('click', () => {    // human vs AI
             // 1. turn off the AI flag
-            logicCtrl.vsAI = true;
+            logicCtrl.setAI(true);
 
             // 2. set active player to 'X', so that correct entry is displayed, as user will play first
-            logicCtrl.activePlayer = 'X';
+            logicCtrl.setPlayer('X');
 
             // 3. reset the game
             reset();
@@ -325,16 +327,16 @@ const controller = ((UICtrl, logicCtrl) => {
     const reset = () => {            
         logicCtrl.resetDS();    // clearing the matrix data
 
-        UICtrl.resetUI(logicCtrl.getPlayerActive());    // clearing the UI / reset
+        UICtrl.resetUI(logicCtrl.getPlayer());    // clearing the UI / reset
 
         // check if vsAI flag is true then setup the game according to the X vs AI
-        if(logicCtrl.vsAI) {
+        if(logicCtrl.getAI()) {
             UICtrl.updateAI();
         }
     };
 
     const toggleUser = () => {
-        logicCtrl.toggleActive();   // 1-change active player
+        logicCtrl.togglePlayer();   // 1-change active player
 
         UICtrl.updateActivePlayer();   // 2-update active player on UI    
     };
@@ -356,30 +358,30 @@ const controller = ((UICtrl, logicCtrl) => {
             logicCtrl.userInput(field.className);
 
             // 3-Update UI
-            UICtrl.updateField(event.target, logicCtrl.getPlayerActive());
+            UICtrl.updateField(event.target, logicCtrl.getPlayer());
 
             // 4-check if the player won the match
             check();
 
-            // 5-when playing with AI--
-            if(logicCtrl.vsAI == true && !UICtrl.isMsgDisplayed()) {
-                logicCtrl.toggleActive();   // change user to AI (make changes to DataStructure only)
+            // 5-change active user-- if(AI) else just change active user	
+            if(logicCtrl.getAI() == true && !UICtrl.isMsgDisplayed()) {
+                logicCtrl.togglePlayer();   // change user to AI (make changes to DataStructure only)
                 
                 const coords = logicCtrl.aiPlayer();   // AI makes its move
                 const field = document.querySelector(`.element--${coords.row + 1}__${coords.col + 1}`);
-                UICtrl.updateField(field, logicCtrl.getPlayerActive());
+                UICtrl.updateField(field, logicCtrl.getPlayer());
 
                 check('AI');
 
-                logicCtrl.toggleActive();   // change AI to user (make changes to DataStructure only)
+                logicCtrl.togglePlayer();   // change AI to user (make changes to DataStructure only)
             } 
-            else if(logicCtrl.vsAI !== true){   // change user - for human vs human 
+            else if(logicCtrl.getAI() !== true){   // change user - for human vs human 
                 toggleUser();      // pass the control to the next play
             }
         }
     };
 
-    const check = (player = logicCtrl.getPlayerActive()) => {
+    const check = (player = logicCtrl.getPlayer()) => {
         const result = logicCtrl.checkWinner();    // checkWinner Inspect's Data Structure, if active user does't won, return undefined
         if(result){
             
