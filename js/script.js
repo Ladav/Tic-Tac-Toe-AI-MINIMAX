@@ -136,7 +136,7 @@ const logicController = (() => {
                 }
             }
         }
-        
+
         return moves[bestMove];    // returning the best move of current Matrix to the previous states matrix or simply return back to one level up
     };
 
@@ -165,7 +165,7 @@ const logicController = (() => {
 
             // aiPlayer
             aiPlayer: () => {
-                let move = {};    //{score:number, index:{row, col}}
+                let move = {};    //   {score:number, index:{row, col}}
                 move = minimax(matrix);
 
                 const row = move.index.row;
@@ -194,7 +194,7 @@ const UIController = (() => {
             field_3_3 : document.querySelector('.element--3__3')
         },
         allFields : document.querySelectorAll('.element'),
-        X: document.querySelector('.x-container'),      // pending this is not used any where remove it
+        X: document.querySelector('.X'),   
         O: document.querySelector('.O'),
         winWindow: document.querySelector('.winner'),
         winner: document.querySelector('.player'),
@@ -338,10 +338,10 @@ const controller = ((UICtrl, logicCtrl) => {
     const toggleUser = () => {
         logicCtrl.togglePlayer();   // 1-change active player
 
-        UICtrl.updateActivePlayer();   // 2-update active player on UI    
+        UICtrl.updateActivePlayer();   // 2-update active player on UI
     };
 
-    // it provide a 2 sec delay to display the winner or draw message
+    // it provide a 2 sec delay to display the winner
     const clearMsgWin = () => {
         setTimeout(() => {
             reset();
