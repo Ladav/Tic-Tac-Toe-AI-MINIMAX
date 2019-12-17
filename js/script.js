@@ -8,8 +8,8 @@
 //***************************************************// 
 const logicController = (() => {
     const matrix = [new Array(3),new Array(3),new Array(3)];
-    let playerActive = 'X';  // flag representing active player(from setting we can set/change the default player)
-    let vsAI = true;  // flag about if the game is player vs AI
+    let playerActive = 'X';
+    let vsAI = true;  // flag about if the game is-- player vs AI
 
     const resetDataStructure = () => {
         for(let i = 0; i < 3; i++){
@@ -24,11 +24,11 @@ const logicController = (() => {
         // ex- data = 'element--1__1'
         temp = data.split('__');
 
-        // temp = ['element--1', '1'] we got coloumn and -1 to make 0 index based 
-        col = parseInt(temp[1], 10) - 1;
+        // temp = ['element--1', '1'] we got coloumns
+        col = parseInt(temp[1], 10) - 1;    // -1 to make it 0 index based 
         
-        // temp = ['element', '1']
-        temp = temp[0].split('--');
+        // temp[0] = element--1
+        temp = temp[0].split('--');     // temp = ['element', '1']
         row = parseInt(temp[1], 10) - 1;    
 
         return {row, col};
