@@ -118,14 +118,14 @@
     }
     
     .winner p {
-        margin-left: 5px;
+        margin-left: 10px;
         margin-bottom: 18px;
-        font-size: 30px;
+        font-size: 35px;
     }
     
     .player {
-        margin-right: 0px;
-        font-size: 80px;
-        line-height: 80px;
+        margin-right: 10px;
+        font-size: 90px;
+        line-height: 90px;
     }
 }
