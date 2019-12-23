@@ -120,12 +120,12 @@
     .winner p {
         margin-left: 5px;
         margin-bottom: 20px;
-        font-size: 35px;
+        font-size: 33px;
     }
     
     .player {
-        margin-right: 10px;
-        font-size: 90px;
-        line-height: 90px;
+        margin-right: 5px;
+        font-size: 85px;
+        line-height: 85px;
     }
 }
