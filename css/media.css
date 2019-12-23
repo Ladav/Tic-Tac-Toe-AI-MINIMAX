@@ -1,11 +1,12 @@
-@media only screen and (max-width: 940px) {
+@media only screen and (max-width: 1048px) {
     .x-container,
     .o-container {
-        font-size:130px;
+        font-size:125px;
         width : 180px;
         height: 180px;
     }
     .X, .O { line-height: 160px; }
+    .o-container {margin-right: 15px;}
 
     .main-container { 
         width: 400px;  
@@ -18,14 +19,15 @@
         height: 94px;
         line-height: 75px;
     }
+
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 820px) {
      .x-container,
      .o-container {
          font-size:110px;
-         width : 120px;
-         height: 120px;
+         width : 150px;
+         height: 150px;
      }
      .x-container { margin-left: 8px; }
      .o-container { margin-right: 8px; }
@@ -45,15 +47,35 @@
      }
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 690px) {
     .x-container,
     .o-container {
-        font-size:100px;
-        width : 100px;
-        height: 100px;
+        font-size: 100px;
+        width : 130px;
+        height: 130px;
+        margin-top: 15px;
     }
     .x-container { top: 93%; left: 5%; }
     .o-container { top: 93%; right: 5%; }
+    .settings-icon { padding-top: 10px; }
+   
+    .winner {
+        top: -10%;
+        left: -2%;
+        width: 480px;   
+        height: 130px;
+    }
+    
+    .winner p {
+        margin-left: 25px;
+        margin-bottom: 25px;
+    }
+    
+    .player {
+        margin-right: 30px;
+        font-size: 120px;
+        line-height: 120px;
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -69,8 +91,8 @@
     .x-container,
     .o-container {
         font-size: 90px;
-        width : 90px;
-        height: 90px;
+        width : 105px;
+        height: 105px;
     }
 
     .main-container { 
@@ -85,4 +107,25 @@
         line-height: 64px;
     }
     .element:default { opacity: 1; }
+    .settings-icon { 
+        font-size: 42px;
+        padding-top: 15px;
+    }
+
+    .winner {
+        width: 350px;   
+        height: 100px;
+    }
+    
+    .winner p {
+        margin-left: 5px;
+        margin-bottom: 20px;
+        font-size: 35px;
+    }
+    
+    .player {
+        margin-right: 10px;
+        font-size: 90px;
+        line-height: 90px;
+    }
 }
