@@ -124,8 +124,8 @@
     }
     
     .player {
-        margin-right: 5px;
-        font-size: 85px;
-        line-height: 85px;
+        margin-right: 0px;
+        font-size: 80px;
+        line-height: 80px;
     }
 }
