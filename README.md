@@ -1,9 +1,9 @@
-# Tic-Tac-Toe-Game
+# Tic-Tac-Toe
 *Tic-tac-toe (also known as noughts and crosses or Xs and Os) is a paper-and-pencil game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.*
 
 <h2> UI </h2>
  
-![Monitor-view](./images/Untitled.png)
+![Application's User Interface](./images/UI.png)
 
 <h2> AI<i>-MINIMAX</i> </h2>
 
