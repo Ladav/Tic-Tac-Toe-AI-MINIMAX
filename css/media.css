@@ -6,11 +6,11 @@
         height: 180px;
     }
     .X, .O { line-height: 160px; }
-    .o-container {margin-right: 15px;}
+    .o-container { margin-right: 15px; }
 
     .main-container { 
         width: 400px;  
-        height: 420px; /*- 30/430*450 -*/
+        height: 420px;
     }
 
     .element {
@@ -30,17 +30,16 @@
          height: 150px;
      }
      .x-container { margin-left: 8px; }
-     .o-container { margin-right: 8px; }
      .X, .O { line-height: 120px; }
+     .o-container { margin-right: 8px; }
  
      .main-container { 
          width: 360px;  
-         height: 380px; /*- 30/430*450 -*/
+         height: 380px;
          padding: 15px;
      }
  
      .element {
-         font-size: 55px;
          width: 90px;
          height: 90px;
          line-height: 72px;
@@ -97,7 +96,7 @@
 
     .main-container { 
         width: 340px;  
-        height: 360px; /*- 30/430*450 -*/
+        height: 360px; 
     }
 
     .element {

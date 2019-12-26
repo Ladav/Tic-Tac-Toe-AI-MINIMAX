@@ -1,14 +1,3 @@
-/**
-  1- in android when i click on a field it get selected and opacity get set at 0.5 and doesn't change when i un-touch that 
-  2- instead of displaying popup msg, on winning and draw, try implementing little animation such as highlight the pattern of the winning situation and in case of draw just highlight the whole ttt fields
-*/
-/*  group the redundant statements of different class
-*   highlight the line pattern upon the winning and display a slide message with adequate msg and ask to try again,
-*   try add animation on the settings button it should roll on click
-*   make sure the text is have proper padding from all sides
-*   i want the component(bar) to float over the other component when someone clicks on setting 
-*/
-
 * {
     margin: 0;
     padding: 0;
@@ -96,8 +85,6 @@ li:first-child{ margin-bottom: 35px;}
 li,
 .settings-icon a { cursor: pointer; }
 
-
-
 /* congratualations message */
 .winner {
     display: block;
@@ -149,11 +136,9 @@ li,
 
 .X, .O { line-height: 180px; }
 
-/* toggle user classes */
 .active { color: #fff; }
 
 /* Main - Controller */
-
 .main-container { 
     position: absolute;
     top: 50%;
