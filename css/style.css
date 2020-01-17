@@ -109,7 +109,7 @@ li,
     font-family: Lato;
     font-size: 40px;
     font-weight: 200;
-    color: rgba(236,226,29,1);
+    color: rgb(122, 122, 109);
     letter-spacing: 1px;
 }
 
@@ -186,5 +186,7 @@ li,
     line-height: 80px;
 }
 
-.element:hover { opacity: 0.5; }
-.element:active { opacity: 1; }
+@media not all and (pointer: coarse) {
+    .element:hover { opacity: 0.5; }
+}
+.element:active { opacity: 0.5; }
