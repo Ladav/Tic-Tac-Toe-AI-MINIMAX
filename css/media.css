@@ -54,8 +54,8 @@
         height: 130px;
         margin-top: 15px;
     }
-    .x-container { top: 93%; left: 5%; }
-    .o-container { top: 93%; right: 5%; }
+    .x-container { top: 97%; left: 5%; }
+    .o-container { top: 97%; right: 5%; }
     .settings-icon { padding-top: 10px; }
    
     .winner {
@@ -78,6 +78,8 @@
 }
 
 @media only screen and (max-width: 500px) {
+    html, body { height: var(--app-height); }
+
     .title {
         margin: 20px 0 0 20px;
         font-size: 35px;
@@ -127,4 +129,54 @@
         font-size: 80px;
         line-height: 80px;
     }
+}
+
+@media (max-height: 400px) {
+    .title { display: none; }
+    .main-container {
+        width: 320px;
+        height: 320px;
+        padding: 11px;
+    }
+
+    .main-settings { width: 300px; }
+    .element {
+        width: 80px;
+        height: 80px;
+        font-size: 50px;
+        line-height: 60px;
+    }
+
+    .x-container,
+    .o-container {
+        top: 50%;
+        left: 0%;
+        font-size: 80px;
+        width: 100px;
+        height: 130px;
+    }
+
+    li:first-child { margin-bottom: 25px; }
+    .settings-icon { font-size: 40px; }
+    li img { width: 60px; }
+
+    .winner {
+        width: 350px;   
+        height: 100px;
+    }
+    
+    .winner p {
+        margin-left: 12px;
+        margin-bottom: 18px;
+        font-size: 30px;
+    }
+
+    .player {
+        margin-right: 8px;
+        font-size: 80px;
+        line-height: 80px;
+    }
+    
+    .x-container { margin-left: 25px; }
+    .o-container { margin-right: 20px; }
 }

@@ -6,13 +6,13 @@
 
 body { 
     height: 100vh;
+    background: -webkit-gradient(linear, left top, right bottom, from(rgb(0, 100, 113)), color-stop(rgb(65, 65, 65)),to(rgb(72, 0, 111)));
     background: linear-gradient(to bottom right, rgb(0, 100, 113), rgb(65, 65, 65),rgb(72, 0, 111));
     font-family: Monoton, arial;
     color: #fff;
     -webkit-tap-highlight-color: transparent; /* android */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -webkit-user-select: none;  /* Safari */        
     -moz-user-select: none;     /* Firefox */
     -ms-user-select: none;      /* IE10+/Edge */
@@ -30,7 +30,8 @@ body {
 .o-container {
     position: relative;
     top: 50%;
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
 }
 
 .window {
@@ -109,7 +110,7 @@ li,
     font-family: Lato;
     font-size: 40px;
     font-weight: 200;
-    color: rgb(122, 122, 109);
+    color: rgba(236,226,29,1);
     letter-spacing: 1px;
 }
 
@@ -143,7 +144,8 @@ li,
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
     width : 430px;
     height: 450px;
     border: 10px solid rgba(209, 209, 209, 0.2);
