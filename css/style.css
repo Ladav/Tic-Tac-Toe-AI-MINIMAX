@@ -192,3 +192,11 @@ li,
     .element:hover { opacity: 0.5; }
 }
 .element:active { opacity: 0.5; }
+
+/*backdrop*/
+.backdrop {
+    height: 100%;
+width: 100%;
+background-color: #000;
+opacity: 0.4;
+}
