@@ -190,7 +190,8 @@ const UIController = (() => {
         setting: document.querySelector('.settings-icon a'),
         setPanel: document.querySelector('ul'),
         btn_Human: document.querySelector('.btn-human'),
-        btn_AI: document.querySelector('.btn-AI')
+        btn_AI: document.querySelector('.btn-AI'),
+        backdrop: document.querySelector('.backdrop')
     };
     
     return {
@@ -271,6 +272,7 @@ const controller = ((UICtrl, logicCtrl) => {
 
         DOM.setting.addEventListener('click', () =>{    // when user click the settings icon
             DOM.setPanel.style.display = DOM.setPanel.style.display === 'none' ? 'block' : 'none';
+            DOM.backdrop.style.display = DOM.backdrop.style.display === 'none' ? 'block' : 'none';
         });
 
         // listen to changes in setting
