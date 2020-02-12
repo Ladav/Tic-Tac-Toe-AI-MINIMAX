@@ -271,8 +271,8 @@ const controller = ((UICtrl, logicCtrl) => {
         DOM.setPanel.style.display = 'none';    // hide the setting panel (default)
 
         DOM.setting.addEventListener('click', () =>{    // when user click the settings icon
-            DOM.setPanel.style.display = DOM.setPanel.style.display === 'none' ? 'block' : 'none';
             DOM.backdrop.style.display = DOM.backdrop.style.display === 'none' ? 'block' : 'none';
+            DOM.setPanel.style.display = DOM.setPanel.style.display === 'none' ? 'block' : 'none';
         });
 
         // listen to changes in setting
