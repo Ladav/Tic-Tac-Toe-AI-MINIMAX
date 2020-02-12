@@ -195,6 +195,7 @@ li,
 
 /*backdrop*/
 .backdrop {
+position: absolute;
     height: 100vh;
 width: 100%;
 background-color: #000;
