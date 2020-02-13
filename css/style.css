@@ -4,8 +4,7 @@
     box-sizing: border-box;
 }
 
-body { 
-position: relative;
+body {
     height: 100vh;
     background: -webkit-gradient(linear, left top, right bottom, from(rgb(0, 100, 113)), color-stop(rgb(65, 65, 65)),to(rgb(72, 0, 111)));
     background: linear-gradient(to bottom right, rgb(0, 100, 113), rgb(65, 65, 65),rgb(72, 0, 111));
@@ -195,15 +194,13 @@ li,
 }
 .element:active { opacity: 0.5; }
 
-/*backdrop*/
+/** Backdrop */
 .backdrop {
-display: none;
-position: absolute;
-top: 0;
-left: 0;
-    height: 100vh;
-width: 100%;
-background-color: #000;
-opacity: 0.7;
-z-index: 99;
+    display: none;
+    position: absolute;
+    height: var(--app-height);
+    width: 100%;
+    background-color: #000;
+    opacity: 0.4;
+    z-index: 9998;
 }
