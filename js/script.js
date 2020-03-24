@@ -187,7 +187,7 @@ const UIController = (() => {
         window: document.querySelector('.winner'),
         winner: document.querySelector('.player'),
         textDraw: document.querySelector('.winner p'),
-        setting: document.querySelector('.settings-icon a'),
+        setting: document.querySelector('.settings'),
         setPanel: document.querySelector('ul'),
         btn_Human: document.querySelector('.btn-human'),
         btn_AI: document.querySelector('.btn-AI'),
@@ -272,7 +272,7 @@ const controller = ((UICtrl, logicCtrl) => {
         const DOM = UICtrl.getDOMInput();
         const fieldArr = Object.values(DOM.field);   // converting object to array
 
-        fieldArr.forEach(el => {   // setting up listener's on all input fields in the matrix
+        fieldArr.forEach(el => {   // setting listener's on all input fields in the matrix
             el.addEventListener('click', getUserInput);
         });
 
